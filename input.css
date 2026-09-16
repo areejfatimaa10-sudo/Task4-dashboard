@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Raw CSS Variables & Dark Mode Tokens */
+:root {
+  --surface: #f8f9fc;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --text-900: #0f172a;
+  --text-600: #475569;
+  --text-400: #94a3b8;
+  --navy-900: #1e1b4b;
+  --navy-800: #312e81;
+  --navy-700: #4338ca;
+  --mood-happy: #10b981;
+  --mood-happy-soft: #d1fae5;
+  --mood-stressed: #ef4444;
+  --mood-stressed-soft: #fee2e2;
+  --mood-bored: #f59e0b;
+  --mood-bored-soft: #fef3c7;
+  --mood-celebratory: #8b5cf6;
+  --mood-celebratory-soft: #ede9fe;
+  --mood-tired: #6b7280;
+  --mood-tired-soft: #f3f4f6;
+  --mood-romantic: #ec4899;
+  --mood-romantic-soft: #fce7f3;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+}
+
+[data-theme="dark"] {
+  --surface: #0f172a;
+  --card: #1e293b;
+  --border: #334155;
+  --text-900: #f8fafc;
+  --text-600: #cbd5e1;
+  --text-400: #64748b;
+  --navy-900: #020617;
+  --navy-800: #0f172a;
+  --navy-700: #1e293b;
+}
+
+/* Source scanner for CLI */
+@source "./index.html";
+@source "./main.js";
+
+@custom-variant dark ([data-theme="dark"] &);
+
+@theme {
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-line: var(--border);
+
+  --color-ink-900: var(--text-900);
+  --color-ink-600: var(--text-600);
+  --color-ink-400: var(--text-400);
+
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+
+  --color-mood-happy: var(--mood-happy);
+  --color-mood-happy-soft: var(--mood-happy-soft);
+  --color-mood-stressed: var(--mood-stressed);
+  --color-mood-stressed-soft: var(--mood-stressed-soft);
+  --color-mood-bored: var(--mood-bored);
+  --color-mood-bored-soft: var(--mood-bored-soft);
+  --color-mood-celebratory: var(--mood-celebratory);
+  --color-mood-celebratory-soft: var(--mood-celebratory-soft);
+  --color-mood-tired: var(--mood-tired);
+  --color-mood-tired-soft: var(--mood-tired-soft);
+  --color-mood-romantic: var(--mood-romantic);
+  --color-mood-romantic-soft: var(--mood-romantic-soft);
+
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-sidenav: #c7c3dc;
+
+  --shadow-card: 0 1px 2px rgba(36, 30, 78, 0.04), 0 10px 26px -14px rgba(36, 30, 78, 0.14);
+  --ease-app: cubic-bezier(0.4, 0, 0.2, 1);
+}

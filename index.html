@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ============================ SEO ============================ -->
+<title>MoodShop Admin Dashboard — Mood-Based Sales &amp; Order Analytics</title>
+<meta name="description" content="MoodShop admin dashboard: track sales, active shoppers, mood match rate, returns and recent orders with interactive Chart.js charts and a searchable order table.">
+<meta name="author" content="Areej Fatima">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#241e4e">
+<link rel="canonical" href="https://moodshop.pk/admin/">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MoodShop">
+<meta property="og:title" content="MoodShop Admin Dashboard — Mood-Based Sales &amp; Order Analytics">
+<meta property="og:description" content="Track sales, shoppers, mood match rate and returns across MoodShop in one dashboard.">
+<meta property="og:url" content="https://moodshop.pk/admin/">
+<meta property="og:image" content="https://moodshop.pk/admin/og-cover.png">
+<meta property="og:locale" content="en_PK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MoodShop Admin Dashboard">
+<meta name="twitter:description" content="Sales, shoppers, mood match rate and returns — one dashboard.">
+<meta name="twitter:image" content="https://moodshop.pk/admin/og-cover.png">
+
+<!-- ==================== RESOURCE HINTS ==================== -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- Fonts + icons -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<!-- ==================== COMPILED TAILWIND v4 ==================== -->
+<link href="./dist/output.css" rel="stylesheet">
+
+<!-- ==================== JSON-LD ==================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MoodShop Admin Dashboard",
+  "url": "https://moodshop.pk/admin/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any modern web browser",
+  "browserRequirements": "Requires JavaScript",
+  "description": "Admin analytics dashboard for MoodShop: sales, active shoppers, mood match rate, pending returns, mood trend charts and a searchable order table.",
+  "inLanguage": "en",
+  "author": { "@type": "Person", "name": "Areej Fatima" },
+  "publisher": { "@type": "Organization", "name": "MoodShop" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PKR" }
+}
+</script>
+</head>
+
+<body class="min-h-full bg-surface font-sans text-[14.5px] leading-normal text-ink-900 antialiased">
+
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-navy-900 focus:px-4 focus:py-2 focus:text-white">Skip to main content</a>
+
+<!-- ============================================================
+     SIDEBAR
+============================================================ -->
+<div id="sidebarBackdrop"
+     class="fixed inset-0 z-30 hidden bg-[rgba(20,16,40,.5)] lg:hidden!"
+     aria-hidden="true"></div>
+
+<aside class="fixed top-0 left-0 h-screen w-64 bg-navy-900 text-white z-40 transition-all duration-300 ease-app">
+  <div class="flex h-[66px] shrink-0 items-center gap-3 border-b border-white/10 px-5">
+    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-linear-to-br from-mood-bored to-mood-romantic text-[15px] font-extrabold text-white" aria-hidden="true">M</div>
+    <div class="nav-label overflow-hidden">
+      <span class="block whitespace-nowrap text-[16.5px] font-extrabold text-white">MoodShop</span>
+      <span class="block whitespace-nowrap text-[11px] text-[#8d88a8]">by Areej Fatima</span>
+    </div>
+  </div>
+
+  <nav class="flex-1 overflow-y-auto p-3" aria-label="Dashboard sections">
+    <p class="nav-label px-3 pb-1.5 pt-2 text-[11px] text-[#6f6a8f]">Menu</p>
+    <ul class="space-y-0.5">
+      <li>
+        <a href="#page-overview" data-page="Overview" aria-current="page"
+           class="nav-item-link flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-xl bg-mood-bored px-3 py-2.5 text-sm font-semibold text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">
+          <i class="bi bi-grid-1x2-fill w-5 shrink-0 text-center text-[17px]" aria-hidden="true"></i><span class="nav-label">Overview</span>
+        </a>
+      </li>
+      <li>
+        <a href="#page-analytics" data-page="Analytics"
+           class="nav-item-link flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold text-sidenav transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">
+          <i class="bi bi-graph-up-arrow w-5 shrink-0 text-center text-[17px]" aria-hidden="true"></i><span class="nav-label">Analytics</span>
+        </a>
+      </li>
+      <li>
+        <a href="#page-reports" data-page="Reports"
+           class="nav-item-link flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold text-sidenav transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">
+          <i class="bi bi-file-earmark-bar-graph w-5 shrink-0 text-center text-[17px]" aria-hidden="true"></i><span class="nav-label">Reports</span>
+        </a>
+      </li>
+      <li>
+        <a href="#page-settings" data-page="Settings"
+           class="nav-item-link flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold text-sidenav transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">
+          <i class="bi bi-gear-fill w-5 shrink-0 text-center text-[17px]" aria-hidden="true"></i><span class="nav-label">Settings</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="shrink-0 border-t border-white/10 p-3">
+    <a href="#"
+       class="nav-item-link flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold text-sidenav transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900">
+      <i class="bi bi-box-arrow-left w-5 shrink-0 text-center text-[17px]" aria-hidden="true"></i><span class="nav-label">Sign out</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ============================================================
+     MAIN AREA
+============================================================ -->
+<div id="appMain" class="flex min-h-screen flex-col transition-[margin] duration-200 ease-app lg:ml-64">
+
+  <!-- ---------------------- Topbar ---------------------- -->
+  <header class="sticky top-0 z-20 flex h-[66px] items-center gap-3 border-b border-line bg-card px-4 sm:px-6">
+
+    <button type="button" id="sidebarToggle"
+            class="flex h-[38px] w-[38px] items-center justify-center rounded-xl border border-transparent text-ink-600 transition-colors duration-150 hover:border-line hover:bg-surface hover:text-ink-900 focus:outline-none focus:ring-2 focus:ring-mood-bored"
+            aria-label="Toggle sidebar" aria-controls="sidebar" aria-expanded="false">
+      <i class="bi bi-list text-xl" aria-hidden="true"></i>
+    </button>
+
+    <div class="relative hidden w-full max-w-[380px] flex-1 sm:block">
+      <label for="globalSearchInput" class="sr-only">Search orders and shoppers</label>
+      <i class="bi bi-search pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[15px] text-ink-400" aria-hidden="true"></i>
+      <input type="search" id="globalSearchInput" placeholder="Search orders, shoppers..." class="h-10 w-full rounded-full border border-line bg-surface pl-[38px] pr-4 text-[13.5px] text-ink-900 transition-colors duration-150 placeholder:text-ink-400 focus:border-mood-bored focus:outline-none">
+    </div>
+
+    <div class="ml-auto flex items-center gap-2">
+
+      <!-- Theme switch -->
+      <button type="button" id="themeSwitch" role="switch" aria-checked="false" aria-label="Toggle dark mode"
+              class="relative h-8 w-14 shrink-0 rounded-full border border-line bg-surface p-1 focus:outline-none focus:ring-2 focus:ring-mood-bored">
+        <span id="themeKnob"
+              class="flex h-6 w-6 translate-x-0 items-center justify-center rounded-full bg-card text-xs shadow-sm transition-transform duration-200 ease-app">
+          <i class="bi bi-sun-fill text-mood-happy" id="themeIcon" aria-hidden="true"></i>
+        </span>
+      </button>
+
+      <!-- Notifications dropdown -->
+      <div class="relative">
+        <button type="button" data-dropdown-trigger aria-expanded="false" aria-haspopup="true" aria-label="Notifications, 3 new"
+                class="relative flex h-[38px] w-[38px] items-center justify-center rounded-xl border border-transparent text-ink-600 transition-colors duration-150 hover:border-line hover:bg-surface hover:text-ink-900 focus:outline-none focus:ring-2 focus:ring-mood-bored">
+          <i class="bi bi-bell text-[17px]" aria-hidden="true"></i>
+          <span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full border-2 border-card bg-mood-celebratory" aria-hidden="true"></span>
+        </button>
+
+        <div class="dropdown-menu absolute right-0 mt-2 hidden w-[300px] origin-top-right rounded-xl border border-line bg-card p-2 shadow-xl transition-all duration-200" role="menu">
+          <div class="mb-1 flex items-center justify-between px-2 py-1">
+            <strong class="text-[13.5px]">Notifications</strong>
+            <span class="text-[11.5px] text-ink-600">3 new</span>
+          </div>
+          <a href="#" role="menuitem" data-goto="Overview" data-highlight="#order-ORD-84021"
+             class="flex items-start gap-2.5 rounded-[10px] px-2.5 py-2 transition-colors duration-150 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored">
+            <span class="mt-1.5 h-[7px] w-[7px] shrink-0 rounded-full bg-mood-bored" aria-hidden="true"></span>
+            <span><span class="block text-[13.5px] font-semibold">Payment received</span><span class="block text-xs text-ink-600">Order #ORD-84021 — 2m ago</span></span>
+          </a>
+          <a href="#" role="menuitem" data-goto="Reports" data-highlight="#return-tired-order"
+             class="flex items-start gap-2.5 rounded-[10px] px-2.5 py-2 transition-colors duration-150 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored">
+            <span class="mt-1.5 h-[7px] w-[7px] shrink-0 rounded-full bg-mood-bored" aria-hidden="true"></span>
+            <span><span class="block text-[13.5px] font-semibold">New return requested</span><span class="block text-xs text-ink-600">Tired mood order — 18m ago</span></span>
+          </a>
+          <a href="#" role="menuitem" data-goto="Reports" data-highlight="#weekly-report-card"
+             class="flex items-start gap-2.5 rounded-[10px] px-2.5 py-2 transition-colors duration-150 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored">
+            <span class="mt-1.5 h-[7px] w-[7px] shrink-0 rounded-full bg-mood-bored" aria-hidden="true"></span>
+            <span><span class="block text-[13.5px] font-semibold">Weekly report ready</span><span class="block text-xs text-ink-600">Mood performance export — 1h ago</span></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Profile dropdown -->
+      <div class="relative">
+        <button type="button" data-dropdown-trigger aria-expanded="false" aria-haspopup="true"
+                class="flex items-center gap-2 rounded-full border border-line bg-surface py-1 pl-1 pr-3 focus:outline-none focus:ring-2 focus:ring-mood-bored">
+          <span class="flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full bg-mood-bored text-[12.5px] font-bold text-white" aria-hidden="true">AF</span>
+          <span class="hidden text-left leading-tight md:block">
+            <span class="block text-[13px] font-bold">Areej F.</span>
+            <span class="block text-[11px] text-ink-600">Admin</span>
+          </span>
+          <i class="bi bi-chevron-down text-[11px] text-ink-600" aria-hidden="true"></i>
+        </button>
+
+        <div class="dropdown-menu absolute right-0 mt-2 hidden w-56 origin-top-right rounded-xl border border-line bg-card p-2 shadow-xl transition-all duration-200" role="menu">
+          <a href="#" role="menuitem" data-goto="Settings" class="flex items-center gap-2 rounded-[10px] px-2.5 py-2 text-[13.5px] transition-colors duration-150 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored"><i class="bi bi-person" aria-hidden="true"></i>My profile</a>
+          <a href="#" role="menuitem" data-goto="Settings" class="flex items-center gap-2 rounded-[10px] px-2.5 py-2 text-[13.5px] transition-colors duration-150 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored"><i class="bi bi-gear" aria-hidden="true"></i>Account settings</a>
+          <hr class="my-2 border-line">
+          <a href="#" role="menuitem" class="flex items-center gap-2 rounded-[10px] px-2.5 py-2 text-[13.5px] transition-colors duration-150 hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-mood-bored"><i class="bi bi-box-arrow-left" aria-hidden="true"></i>Sign out</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ---------------------- Content ---------------------- -->
+  <main id="main-content" class="flex-1 p-5 sm:p-6">
+
+    <div class="mb-6">
+      <h1 id="pageTitle" class="text-[23px] font-extrabold tracking-tight">Overview</h1>
+      <p id="pageSubtitle" class="mt-0.5 text-[13.5px] text-ink-600">Here's how shoppers are moving through MoodShop today.</p>
+    </div>
+
+    <!-- ================= PAGE: OVERVIEW ================= -->
+    <section class="page-section" id="page-overview" aria-labelledby="pageTitle">
+
+      <!-- KPI GRID -->
+      <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+
+        <article class="h-full overflow-hidden rounded-2xl border border-line bg-card px-5 pt-5 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-card">
+          <div class="mb-3.5 flex items-start justify-between">
+            <span class="flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-mood-celebratory-soft text-[17px] text-mood-celebratory" aria-hidden="true"><i class="bi bi-currency-exchange"></i></span>
+          </div>
+          <h2 class="mb-1.5 text-[12.5px] font-bold text-ink-600">Total Sales</h2>
+          <p class="num-tabular mb-2.5 text-2xl font-extrabold">Rs 8,42,900</p>
+          <p>
+            <span class="inline-flex items-center gap-1 rounded-full bg-mood-stressed-soft px-2.5 py-0.5 text-xs font-bold text-mood-stressed"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>12.4%</span>
+            <span class="ml-1.5 text-xs text-ink-400">vs last month</span>
+          </p>
+          <div class="-mx-5 mt-4 h-[5px] bg-mood-celebratory" aria-hidden="true"></div>
+        </article>
+
+        <article class="h-full overflow-hidden rounded-2xl border border-line bg-card px-5 pt-5 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-card">
+          <div class="mb-3.5 flex items-start justify-between">
+            <span class="flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-mood-happy-soft text-[17px] text-mood-happy" aria-hidden="true"><i class="bi bi-people-fill"></i></span>
+          </div>
+          <h2 class="mb-1.5 text-[12.5px] font-bold text-ink-600">Active Shoppers</h2>
+          <p class="num-tabular mb-2.5 text-2xl font-extrabold">12,847</p>
+          <p>
+            <span class="inline-flex items-center gap-1 rounded-full bg-mood-stressed-soft px-2.5 py-0.5 text-xs font-bold text-mood-stressed"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>8.1%</span>
+            <span class="ml-1.5 text-xs text-ink-400">vs last month</span>
+          </p>
+          <div class="-mx-5 mt-4 h-[5px] bg-mood-happy" aria-hidden="true"></div>
+        </article>
+
+        <article class="h-full overflow-hidden rounded-2xl border border-line bg-card px-5 pt-5 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-card">
+          <div class="mb-3.5 flex items-start justify-between">
+            <span class="flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-mood-bored-soft text-[17px] text-mood-bored" aria-hidden="true"><i class="bi bi-emoji-heart-eyes"></i></span>
+          </div>
+          <h2 class="mb-1.5 text-[12.5px] font-bold text-ink-600">Mood Match Rate</h2>
+          <div class="gauge-box"><canvas id="moodGaugeChart" role="img" aria-label="Mood match rate gauge: 34.2 percent"></canvas></div>
+          <p>
+            <span class="inline-flex items-center gap-1 rounded-full bg-danger-soft px-2.5 py-0.5 text-xs font-bold text-danger"><i class="bi bi-arrow-down-short" aria-hidden="true"></i>1.8%</span>
+            <span class="ml-1.5 text-xs text-ink-400">vs last month</span>
+          </p>
+          <div class="-mx-5 mt-4 h-[5px] bg-mood-bored" aria-hidden="true"></div>
+        </article>
+
+        <article class="h-full overflow-hidden rounded-2xl border border-line bg-card px-5 pt-5 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-card">
+          <div class="mb-3.5 flex items-start justify-between">
+            <span class="flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-mood-tired-soft text-[17px] text-mood-tired" aria-hidden="true"><i class="bi bi-arrow-return-left"></i></span>
+          </div>
+          <h2 class="mb-1.5 text-[12.5px] font-bold text-ink-600">Pending Returns</h2>
+          <p class="num-tabular mb-2.5 text-2xl font-extrabold">27</p>
+          <p>
+            <span class="inline-flex items-center gap-1 rounded-full bg-danger-soft px-2.5 py-0.5 text-xs font-bold text-danger"><i class="bi bi-arrow-up-short" aria-hidden="true"></i>5.3%</span>
+            <span class="ml-1.5 text-xs text-ink-400">vs last month</span>
+          </p>
+          <div class="-mx-5 mt-4 h-[5px] bg-mood-tired" aria-hidden="true"></div>
+        </article>
+      </div>
+
+      <!-- CHARTS GRID -->
+      <div class="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+
+        <article class="rounded-[22px] border border-line bg-card p-[22px] shadow-card lg:col-span-2">
+          <div class="mb-[18px] flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 class="text-[15.5px] font-extrabold tracking-tight">Monthly Performance</h2>
+              <p class="mt-0.5 text-[12.5px] text-ink-600">Sales vs active shoppers, last 12 months</p>
+            </div>
+            <div class="inline-flex gap-1.5" role="group" aria-label="Chart range">
+              <button type="button" data-range="12m" aria-pressed="true"
+                      class="rounded-full border border-navy-900 bg-navy-900 px-3 py-1.5 text-xs font-bold text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-mood-bored">12M</button>
+              <button type="button" data-range="6m" aria-pressed="false"
+                      class="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-ink-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-mood-bored">6M</button>
+              <button type="button" data-range="3m" aria-pressed="false"
+                      class="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-ink-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-mood-bored">3M</button>
+            </div>
+          </div>
+          <div class="chart-box h-[260px]">
+            <canvas id="mainChart" role="img" aria-label="Bar chart of monthly sales and active shoppers"></canvas>
+          </div>
+        </article>
+
+        <article class="rounded-[22px] border border-line bg-card p-[22px] shadow-card">
+          <div class="mb-[18px]">
+            <h2 class="text-[15.5px] font-extrabold tracking-tight">Sales by Mood</h2>
+            <p class="mt-0.5 text-[12.5px] text-ink-600">Share of orders by mood picked at checkout</p>
+          </div>
+          <div class="chart-box h-[220px]">
+            <canvas id="donutChart" role="img" aria-label="Doughnut chart of order share by shopper mood"></canvas>
+          </div>
+          <ul class="mt-4 flex flex-wrap gap-x-4 gap-y-2" id="donutLegend"></ul>
+        </article>
+      </div>
+
+      <!-- ORDERS TABLE -->
+      <section class="rounded-[22px] border border-line bg-card p-[22px] shadow-card" aria-labelledby="ordersHeading">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 id="ordersHeading" class="text-[15.5px] font-extrabold tracking-tight">Recent Orders</h2>
+            <p class="mt-0.5 text-[12.5px] text-ink-600">Latest orders across all shoppers</p>
+          </div>
+          <div class="relative w-full max-w-[250px]">
+            <label for="tableSearchInput" class="sr-only">Filter orders</label>
+            <i class="bi bi-search pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[13px] text-ink-400" aria-hidden="true"></i>
+            <input type="search" id="tableSearchInput" placeholder="Filter orders..."
+                   class="h-9 w-full rounded-full border border-line bg-surface pl-8 pr-3 text-[13px] text-ink-900 placeholder:text-ink-400 focus:border-mood-bored focus:outline-none">
+          </div>
+        </div>
+
+        <div class="-mx-[22px] overflow-x-auto px-[22px]">
+          <table class="w-full border-separate border-spacing-0 text-[13.5px]" id="txTable">
+            <caption class="sr-only">Recent MoodShop orders with customer, order ID, date, mood, amount and status</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="border-b border-line px-3 pb-2.5 text-left text-[11.5px] font-bold text-ink-400">Customer</th>
+                <th scope="col" class="border-b border-line px-3 pb-2.5 text-left text-[11.5px] font-bold text-ink-400">Order ID</th>
+                <th scope="col" class="border-b border-line px-3 pb-2.5 text-left text-[11.5px] font-bold text-ink-400">Date</th>
+                <th scope="col" class="border-b border-line px-3 pb-2.5 text-left text-[11.5px] font-bold text-ink-400">Mood</th>
+                <th scope="col" class="border-b border-line px-3 pb-2.5 text-left text-[11.5px] font-bold text-ink-400">Amount</th>
+                <th scope="col" class="border-b border-line px-3 pb-2.5 text-left text-[11.5px] font-bold text-ink-400">Status</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-2.5">
+          <p class="text-[12.5px] text-ink-600" id="paginationInfo" aria-live="polite"></p>
+          <div class="flex gap-1" id="paginationControls" role="group" aria-label="Table pagination"></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ================= PAGE: ANALYTICS ================= -->
+    <section class="page-section hidden" id="page-analytics">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <article class="rounded-[22px] border border-line bg-card p-[22px] shadow-card lg:col-span-2">
+          <div class="mb-[18px]">
+            <h2 class="text-[15.5px] font-extrabold tracking-tight">Mood Trends</h2>
+            <p class="mt-0.5 text-[12.5px] text-ink-600">How shopper moods are shifting over time</p>
+          </div>
+          <div class="chart-box h-[280px]">
+            <canvas id="analyticsChart" role="img" aria-label="Line chart of happy, stressed and celebratory mood trends"></canvas>
+          </div>
+        </article>
+
+        <article class="h-full rounded-[22px] border border-line bg-card p-[22px] shadow-card">
+          <div class="mb-[18px]">
+            <h2 class="text-[15.5px] font-extrabold tracking-tight">Quick Stats</h2>
+            <p class="mt-0.5 text-[12.5px] text-ink-600">Snapshot of shopper behaviour</p>
+          </div>
+          <dl class="flex flex-col gap-4">
+            <div>
+              <dt class="text-[12.5px] font-bold text-ink-600">Avg. session time</dt>
+              <dd class="num-tabular text-xl font-extrabold">6m 42s</dd>
+            </div>
+            <div>
+              <dt class="text-[12.5px] font-bold text-ink-600">Cart abandonment</dt>
+              <dd class="num-tabular text-xl font-extrabold">31.2%</dd>
+            </div>
+            <div>
+              <dt class="text-[12.5px] font-bold text-ink-600">Repeat shoppers</dt>
+              <dd class="num-tabular text-xl font-extrabold">44.6%</dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= PAGE: REPORTS ================= -->
+    <section class="page-section hidden" id="page-reports">
+
+      <article class="mb-4 rounded-[22px] border border-line bg-card p-[22px] shadow-card">
+        <div class="mb-[18px]">
+          <h2 class="text-[15.5px] font-extrabold tracking-tight">Pending Returns</h2>
+          <p class="mt-0.5 text-[12.5px] text-ink-600">Return requests awaiting review</p>
+        </div>
+        <ul class="flex flex-col gap-2">
+          <li id="return-tired-order" class="flex items-center justify-between gap-3 rounded-xl border border-line px-3.5 py-3 transition-colors duration-150 hover:bg-surface">
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy-900 text-[11px] font-bold text-white" aria-hidden="true">UG</span>
+              <span>
+                <span class="block font-bold">Usman Ghani</span>
+                <span class="block text-xs text-ink-600">Order #ORD-84016 · Tired mood order · 18m ago</span>
+              </span>
+            </div>
+            <span class="rounded-full bg-mood-tired-soft px-2.5 py-1 text-[11.5px] font-bold text-mood-tired">Tired</span>
+          </li>
+          <li class="flex items-center justify-between gap-3 rounded-xl border border-line px-3.5 py-3 transition-colors duration-150 hover:bg-surface">
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy-900 text-[11px] font-bold text-white" aria-hidden="true">BA</span>
+              <span>
+                <span class="block font-bold">M.Ammar</span>
+                <span class="block text-xs text-ink-600">Order #ORD-84018 · Bored mood order · 1d ago</span>
+              </span>
+            </div>
+            <span class="rounded-full bg-mood-bored-soft px-2.5 py-1 text-[11.5px] font-bold text-mood-bored">Bored</span>
+          </li>
+        </ul>
+      </article>
+
+      <article class="rounded-[22px] border border-line bg-card p-[22px] shadow-card">
+        <div class="mb-[18px]">
+          <h2 class="text-[15.5px] font-extrabold tracking-tight">Recent Reports</h2>
+          <p class="mt-0.5 text-[12.5px] text-ink-600">Generated exports ready to download</p>
+        </div>
+        <ul class="flex flex-col gap-2">
+          <li id="weekly-report-card" class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line px-3.5 py-3 transition-colors duration-150 hover:bg-surface">
+            <div class="flex items-center gap-3">
+              <span class="flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-mood-bored-soft text-[17px] text-mood-bored" aria-hidden="true"><i class="bi bi-file-earmark-bar-graph"></i></span>
+              <span>
+                <span class="block font-bold">Weekly Mood Performance Report</span>
+                <span class="block text-xs text-ink-600">Generated Sep 12, 2026 · 1h ago</span>
+              </span>
+            </div>
+            <button type="button" class="inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-4 py-2 text-[13px] font-bold text-white transition-colors duration-150 hover:bg-navy-700 focus:outline-none focus:ring-2 focus:ring-mood-bored">
+              <i class="bi bi-download" aria-hidden="true"></i>Download
+            </button>
+          </li>
+          <li class="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line px-3.5 py-3 transition-colors duration-150 hover:bg-surface">
+            <div class="flex items-center gap-3">
+              <span class="flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-mood-happy-soft text-[17px] text-mood-happy" aria-hidden="true"><i class="bi bi-file-earmark-bar-graph"></i></span>
+              <span>
+                <span class="block font-bold">Monthly Sales Summary</span>
+                <span class="block text-xs text-ink-600">Generated Sep 01, 2026</span>
+              </span>
+            </div>
+            <button type="button" class="inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-4 py-2 text-[13px] font-bold text-white transition-colors duration-150 hover:bg-navy-700 focus:outline-none focus:ring-2 focus:ring-mood-bored">
+              <i class="bi bi-download" aria-hidden="true"></i>Download
+            </button>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- ================= PAGE: SETTINGS ================= -->
+    <section class="page-section hidden" id="page-settings">
+      <article class="max-w-[560px] rounded-[22px] border border-line bg-card p-[22px] shadow-card">
+        <div class="mb-[18px]">
+          <h2 class="text-[15.5px] font-extrabold tracking-tight">Account Settings</h2>
+          <p class="mt-0.5 text-[12.5px] text-ink-600">Update your admin profile and preferences</p>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div>
+            <label for="displayName" class="mb-1 block text-[12.5px] font-bold text-ink-600">Display name</label>
+            <input type="text" id="displayName" value="Areej F."
+                   class="h-10 w-full rounded-full border border-line bg-surface px-4 text-[13.5px] text-ink-900 focus:border-mood-bored focus:outline-none">
+          </div>
+          <div>
+            <label for="supportEmail" class="mb-1 block text-[12.5px] font-bold text-ink-600">Support email</label>
+            <input type="email" id="supportEmail" value="admin@moodshop.pk"
+                   class="h-10 w-full rounded-full border border-line bg-surface px-4 text-[13.5px] text-ink-900 focus:border-mood-bored focus:outline-none">
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="notifToggle" class="peer sr-only" checked>
+            <label for="notifToggle" class="relative h-6 w-11 shrink-0 cursor-pointer rounded-full bg-line transition-colors duration-200 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow-sm after:transition-transform after:duration-200 after:content-[''] peer-checked:bg-mood-bored peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-mood-bored peer-focus-visible:ring-offset-2">
+              <span class="sr-only">Email me new order notifications</span>
+            </label>
+            <label for="notifToggle" class="cursor-pointer text-[13.5px]">Email me new order notifications</label>
+          </div>
+
+          <button type="button" id="saveSettingsBtn"
+                  class="inline-flex w-fit items-center gap-1.5 self-start rounded-full bg-navy-900 px-4 py-2 text-[13px] font-bold text-white transition-colors duration-150 hover:bg-navy-700 focus:outline-none focus:ring-2 focus:ring-mood-bored">
+            <i class="bi bi-check2" aria-hidden="true"></i>Save changes
+          </button>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-line px-5 py-4 text-xs text-ink-400 sm:px-6">
+    <p>MoodShop admin · Internal dashboard · Data refreshed hourly</p>
+  </footer>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+<script src="./main.js" defer></script>
+</body>
+</html>

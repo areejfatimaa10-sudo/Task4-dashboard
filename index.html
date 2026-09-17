@@ -63,15 +63,17 @@
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-navy-900 focus:px-4 focus:py-2 focus:text-white">Skip to main content</a>
 
 <!-- ============================================================
-     SIDEBAR
+     SIDEBAR BACKDROP & DRAWER
 ============================================================ -->
 <div id="sidebarBackdrop"
-     class="fixed inset-0 z-30 hidden bg-[rgba(20,16,40,.5)] lg:hidden!"
+     class="fixed inset-0 z-40 hidden bg-navy-900/60 backdrop-blur-xs lg:hidden"
      aria-hidden="true"></div>
 
-<aside class="fixed top-0 left-0 h-screen w-64 bg-navy-900 text-white z-40 transition-all duration-300 ease-app">
+<aside id="sidebar" 
+       class="fixed top-0 left-0 z-50 h-screen w-64 -translate-x-full flex-col bg-navy-900 text-white transition-transform duration-300 ease-app lg:translate-x-0 flex">
+  
   <div class="flex h-[66px] shrink-0 items-center gap-3 border-b border-white/10 px-5">
-    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-linear-to-br from-mood-bored to-mood-romantic text-[15px] font-extrabold text-white" aria-hidden="true">M</div>
+    <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br from-mood-bored to-mood-romantic text-[15px] font-extrabold text-white" aria-hidden="true">M</div>
     <div class="nav-label overflow-hidden">
       <span class="block whitespace-nowrap text-[16.5px] font-extrabold text-white">MoodShop</span>
       <span class="block whitespace-nowrap text-[11px] text-[#8d88a8]">by Areej Fatima</span>

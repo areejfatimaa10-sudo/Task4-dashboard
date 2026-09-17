@@ -1,14 +1,12 @@
-/* ============================================================
+/* 
    MoodShop Admin Dashboard — main.js
-   jQuery 3.7.1 + Chart.js 4.4.4. No Bootstrap JS: dropdowns,
-   the mobile drawer and page switching are plain jQuery class
-   toggles against Tailwind utilities.
-   ============================================================ */
+   
+    */
 $(function () {
 
-  /* ============================================================
+  /* 
      UTILITIES
-  ============================================================ */
+  */
   function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
   function safeSet(key, val) { try { localStorage.setItem(key, val); } catch (e) { /* no-op */ } }
 
@@ -31,9 +29,9 @@ $(function () {
     pageIdle:    'border-line text-ink-600'
   };
 
-  /* ============================================================
+  /* 
      MODULE: Theme (dark / light)
-  ============================================================ */
+   */
   const Theme = {
     init() {
       const saved = safeGet('moodshop-theme') || 'light';
@@ -61,11 +59,9 @@ $(function () {
     }
   };
 
-  /* ============================================================
-     MODULE: Dropdowns — replaces data-bs-toggle="dropdown".
-     A [data-dropdown-trigger] button followed by a sibling
-     .dropdown-menu panel is all the markup that's needed.
-  ============================================================ */
+  /* 
+     MODULE: Dropdowns 
+ */
   const Dropdowns = {
     init() {
       $('[data-dropdown-trigger]').on('click', function (e) {
@@ -91,9 +87,9 @@ $(function () {
     }
   };
 
-  /* ============================================================
+  /* 
      MODULE: Sidebar (desktop collapse + mobile drawer)
-  ============================================================ */
+   */
   const Sidebar = {
     collapsed: false,
 
@@ -128,11 +124,11 @@ $(function () {
     }
   };
 
-  /* ============================================================
-     MODULE: Pages — shows one <section class="page-section">,
+  /* 
+     MODULE: Pages - shows one <section class="page-section">,
      keeps sidebar state + heading in sync, and can highlight a
      specific element once the target page is visible.
-  ============================================================ */
+ */
   const Pages = {
     subtitles: {
       Overview:  "Here's how shoppers are moving through MoodShop today.",
@@ -192,9 +188,9 @@ $(function () {
     }
   };
 
-  /* ============================================================
+  /*
      MODULE: Charts
-  ============================================================ */
+   */
   const Charts = {
     main: null,
     donut: null,
@@ -472,9 +468,9 @@ $(function () {
     }
   };
 
-  /* ============================================================
+  /*
      MODULE: Orders Table (render, search, paginate)
-  ============================================================ */
+ */
   const TxTable = {
     rowsPerPage: 5,
     currentPage: 1,
@@ -610,9 +606,9 @@ $(function () {
     capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   };
 
-  /* ============================================================
+  /* 
      MODULE: Settings page (static save feedback)
-  ============================================================ */
+  */
   const Settings = {
     init() {
       $('#saveSettingsBtn').on('click', function () {
@@ -625,9 +621,9 @@ $(function () {
     }
   };
 
-  /* ============================================================
+  /* 
      INIT
-  ============================================================ */
+   */
   Theme.init();
   Dropdowns.init();
   Sidebar.init();
